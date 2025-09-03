@@ -1,0 +1,8 @@
+<app-admin-navigation></app-admin-navigation>
+<h1>Види витрат</h1>
+@for (expenseType of expenseTypes; track expenseType) {
+    <div class="expense-type-item">
+        <span class="name">{{ expenseType.name }}</span>
+        <span class="max_amount">{{ expenseType.max_amount }}</span>
+    </div>
+}

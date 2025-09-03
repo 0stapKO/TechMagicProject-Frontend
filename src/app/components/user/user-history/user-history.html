@@ -1,0 +1,9 @@
+<app-user-navigation></app-user-navigation>
+<h1>Історія витрат</h1>
+@for (expense of history; track expense) {
+  <div class="history-item">
+    <span class="type">{{ expense.type }}</span>
+    <span class="date">{{ expense.date }}</span>
+    <span class="amount">{{ expense.amount }}</span>
+  </div>
+}

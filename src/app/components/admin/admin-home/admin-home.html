@@ -1,0 +1,11 @@
+<app-admin-navigation></app-admin-navigation>
+<h1>Усі витрати</h1>
+@for (expense of allExpenses; track expense) {
+    <div class="expense-item">
+        <span class="name">{{ expense.name }}</span>
+        <span class="department">{{ expense.department }}</span>
+        <span class="date">{{ expense.date }}</span>
+        <span class="amount">{{ expense.expence_amount }}</span>
+        <span class="type">{{ expense.type }}</span>
+    </div>
+}

@@ -1,0 +1,8 @@
+<app-admin-navigation></app-admin-navigation>
+<h1>Відділи</h1>
+@for (department of departments; track department) {
+    <div class="department-item">
+        <span class="name">{{ department.name }}</span>
+        <span class="workers_count">{{ department.workers_count }}</span>
+    </div>
+}

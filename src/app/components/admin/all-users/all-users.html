@@ -1,0 +1,10 @@
+<app-admin-navigation></app-admin-navigation>
+<h1>Усі співробітники</h1>
+@for (user of users; track user) {
+    <div class="user-item">
+        <span class="name">{{ user.name }}</span>
+        <span class="department">{{ user.department }}</span>
+        <span class="email">{{ user.email }}</span>
+        <span class="role">{{ user.role }}</span>
+    </div>
+}

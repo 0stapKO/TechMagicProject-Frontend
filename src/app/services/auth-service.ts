@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http'; // ✅ Імпортуй HttpClient
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
+interface LoginResponse {
+  token: string;
+  role: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -7,26 +14,36 @@ import { Router } from '@angular/router';
 export class AuthService {
   private role: string | null = null;
 
-  constructor(private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {
+    console.log('AuthService initialized');
+  }
 
   login(email: string, password: string): void {
     console.log(email, password);
-    // localStorage.setItem('token', token);
 
-    // const payload = JSON.parse(atob(token.split('.')[1]));
-    // this.role = payload.role;
-      // this.role = token;
-    this.role = password;
+    this.http.post<LoginResponse>('http://localhost:5000/api/login', { email, password })
+      .subscribe({
+        next: (response) => {
+          console.log('Login successful', response);
+          this.role = response.role; 
+          localStorage.setItem('token', response.token); 
+          this.redirectUser();
+        },
+        error: (err) => {
+          console.error('Login failed', err);
+        }
+      });
+  }
+
+  private redirectUser(): void {
     if (this.role === 'admin') {
-      console.log('admin');
       this.router.navigate(['/admin/home']);
     } else {
       this.router.navigate(['/home']);
     }
-  }
-
-  getRole(): string | null {
-    return this.role;
   }
 
   isAdmin(): boolean {

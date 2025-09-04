@@ -1,15 +1,13 @@
 <h1>Оформити витрату</h1>
 <app-user-navigation></app-user-navigation>
 <select [(ngModel)]="type">
-  <option value="Канцелярія">Канцелярія</option>
+  @for (expenseType of allExpenseTypes; track expenseType) {
+    <option [value]="expenseType.name">{{ expenseType.name }}</option>
+  }
+  <!-- <option value="Канцелярія">Канцелярія</option>
   <option value="Продукти">Продукти</option>
-  <option value="Транспорт">Транспорт</option>
+  <option value="Транспорт">Транспорт</option> -->
 </select>
 <input type="date" [(ngModel)]="date" />
 <input type="text" placeholder="Сума" [(ngModel)]="amount" />
-<select [(ngModel)]="department">
-    <option value="HR">Відділ кадрів</option>
-    <option value="IT">IT</option>
-    <option value="Sales">Товарний</option>
-</select>
 <button (click)="addExpense()">Додати витрату</button>

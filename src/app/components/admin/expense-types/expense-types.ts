@@ -22,6 +22,6 @@ export class ExpenseTypes {
   constructor(private expenseTypeService: ExpenseTypeService) {
     this.expenseTypeService.getExpenseTypes().subscribe((types) => {
       this.expenseTypes = types;
-          console.log('ALL types', this.expenseTypes[0]);})
+      console.log('ALL types', this.expenseTypes[0]);})
   }
 }

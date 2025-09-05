@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { AdminNavigation } from '../admin-navigation/admin-navigation';
 import { DepartmentService } from '../../../services/department-service';
 import { Department } from '../../../models/department.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-departments',
-  imports: [AdminNavigation],
+  imports: [AdminNavigation, FormsModule],
   templateUrl: './departments.html',
   styleUrl: './departments.scss'
 })
@@ -17,11 +18,36 @@ export class Departments {
           console.log('ALL DEPARTMENTS', this.allDepartments[0]);})
   }
 
-  // public departments = [ 
-  //   { name: 'IT', workers_count: 10 },
-  //   { name: 'HR', workers_count: 5 },
-  //   { name: 'Finance', workers_count: 8 },
-  //   { name: 'Marketing', workers_count: 7 },
-  //   { name: 'Sales', workers_count: 6 }
-  //  ];
+  editDepartment(department: Department) {
+    department.isEdited = true;
+  }
+
+  deleteDepartment(departmentId: string) {
+    console.log('Видалення департаменту з ID:', departmentId);
+    this.departmentService.deleteDepartment(departmentId).subscribe(() => {
+      this.allDepartments = this.allDepartments.filter(dept => dept.id !== departmentId);
+    });
+  }
+
+  saveChanges(department: Department) {
+    console.log('Збереження змін для департаменту:', department);
+    department.isEdited = false;
+    this.departmentService.updateDepartment(department).subscribe((updatedDept) => {
+      console.log('Оновлений департамент:', updatedDept);
+    });
+  }
+
+  addDepartment() {
+    const newDepartment: Department = {
+      id: '',
+      name: 'Новий відділ',
+      workers_number: 0,
+      isEdited: true
+    };
+    this.departmentService.addDepartment(newDepartment).subscribe((createdDeptId) => {
+      newDepartment.id = createdDeptId;
+      this.allDepartments.push(newDepartment);
+    });
+
+  }
 }

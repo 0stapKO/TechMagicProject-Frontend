@@ -1,8 +1,22 @@
 <app-admin-navigation></app-admin-navigation>
 <h1>Види витрат</h1>
 @for (expenseType of expenseTypes; track expenseType) {
-    <div class="expense-type-item">
-        <span class="name">{{ expenseType.name }}</span>
-        <span class="max_amount">{{ expenseType.max_amount }}</span>
-    </div>
+    @if (expenseType.isEdited) {
+        <div class="edit-form">
+            <input type="text" [(ngModel)]="expenseType.name" placeholder="Назва виду витрат" />
+            <input type="text" [(ngModel)]="expenseType.description" placeholder="Опис" />
+            <input type="number" [(ngModel)]="expenseType.max_amount" placeholder="Максимальна сума" />
+            <button (click)="saveChanges(expenseType)">Зберегти</button>
+        </div>
+    }
+    @else {
+        <div class="expense-type-item">
+            <span class="name">{{ expenseType.name }}</span>
+            <span class="description">{{ expenseType.description }}</span>
+            <span class="max_amount">{{ expenseType.max_amount }}</span>
+            <button (click)="editType(expenseType)">Редагувати</button>
+            <button (click)="deleteType(expenseType.id)">Видалити</button>
+        </div>
+    }
 }
+<button (click)="addType()">Додати вид витрат</button>

@@ -2,24 +2,61 @@ import { Component } from '@angular/core';
 import { AdminNavigation } from '../admin-navigation/admin-navigation';
 import { User } from '../../../models/user.model';
 import { UserService } from '../../../services/user-service';
-
+import { DepartmentService } from '../../../services/department-service';
+import { FormsModule } from '@angular/forms';
+import { Department } from '../../../models/department.model';
 @Component({
   selector: 'app-all-users',
-  imports: [AdminNavigation],
+  imports: [AdminNavigation, FormsModule],
   templateUrl: './all-users.html',
   styleUrl: './all-users.scss'
 })
 export class AllUsers {
   public users: User[] = [];
-  constructor(userService: UserService) {
+  public departments: Department[] = []
+
+  constructor(private userService: UserService, private departmentService: DepartmentService) {
     userService.getAllUsers().subscribe((users) => {
-      this.users = users;})
+      this.users = users;
+      console.log(users[0])
+    });
+    departmentService.getDepartments().subscribe((departments) =>{
+      this.departments = departments;
+      console.log(this.departments[0])
+    })
   }
-  // public users = [
-  //   { name: 'John Doe', department: 'IT', email: '123@dmail.com', role: 'User' },
-  //   { name: 'Jane Smith', department: 'HR', email: 'janesmith@.com', role: 'Admin' },
-  //   { name: 'Mike Johnson', department: 'Finance', email: 'mikej@.com', role: 'User' },
-  //   { name: 'Emily Davis', department: 'Marketing', email: 'emilyd@.com', role: 'User' },
-  //   { name: 'David Wilson', department: 'Sales', email: 'davidw@.com', role: 'Admin' }
-  // ];
+ 
+  editUser(user: User) {
+    user.isEdited = true;
+  }
+
+  deleteUser(userId: string) {
+    console.log(userId)
+    this.userService.deleteUser(userId).subscribe(() => {
+      this.users = this.users.filter(user => user.id !== userId);
+    })
+  }
+
+  saveUser(user: User){
+    console.log(user)
+    user.isEdited = false;
+    this.userService.updateUser(user).subscribe(user => {
+      console.log(user)
+    })
+  }
+
+  addUser() {
+    const newUser: User = {
+      id: '',
+      name: '',
+      email: '',
+      password: '',
+      role: 'user',
+      isEdited: true
+    }
+    this.userService.addUser(newUser).subscribe(userId => {
+      newUser.id = userId;
+      this.users.push(newUser);
+    })
+  }
 }

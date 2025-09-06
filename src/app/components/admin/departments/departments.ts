@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class Departments {
   public allDepartments: Department[] = [];
+
   constructor(private departmentService: DepartmentService) {
     this.departmentService.getDepartments().subscribe((departments) => {
       this.allDepartments = departments;
@@ -23,7 +24,6 @@ export class Departments {
   }
 
   deleteDepartment(departmentId: string) {
-    console.log('Видалення департаменту з ID:', departmentId);
     this.departmentService.deleteDepartment(departmentId).subscribe(() => {
       this.allDepartments = this.allDepartments.filter(dept => dept.id !== departmentId);
     });
@@ -40,7 +40,7 @@ export class Departments {
   addDepartment() {
     const newDepartment: Department = {
       id: '',
-      name: 'Новий відділ',
+      name: '',
       workers_number: 0,
       isEdited: true
     };

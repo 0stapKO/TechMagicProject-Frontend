@@ -1,17 +1,19 @@
 <app-admin-navigation></app-admin-navigation>
 <h1>Відділи</h1>
 @for (department of allDepartments; track department) {
-    <div class="department-item">
-        <span class="name">{{ department.name }}</span>
-        <span class="workers_count">{{ department.workers_number }}</span>
-        <button (click)="editDepartment(department)">Редагувати</button>
-        <button (click)="deleteDepartment(department.id)">Видалити</button>
-    </div>
     @if (department.isEdited) {
         <div class="edit-form">
             <input type="text" [(ngModel)]="department.name" placeholder="Назва відділу" />
             <input type="number" [(ngModel)]="department.workers_number" placeholder="Кількість працівників" />
             <button (click)="saveChanges(department)">Зберегти</button>
+        </div>
+    }
+    @else {
+        <div class="department-item">
+            <span class="name">{{ department.name }}</span>
+            <span class="workers_count">{{ department.workers_number }}</span>
+            <button (click)="editDepartment(department)">Редагувати</button>
+            <button (click)="deleteDepartment(department.id)">Видалити</button>
         </div>
     }
 }

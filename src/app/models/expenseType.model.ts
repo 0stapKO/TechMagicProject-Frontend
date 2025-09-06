@@ -3,4 +3,5 @@ export interface ExpenseType {
     name: string;
     description: string;
     max_amount: number;
+    isEdited?: boolean;
 }

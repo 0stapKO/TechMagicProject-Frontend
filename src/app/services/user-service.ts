@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 export class UserService {
   private token: string | null = localStorage.getItem('token');
   private apiUrl = 'http://localhost:5000/api/users/all';
-  public departments: User[] = [];
 
   constructor(private http: HttpClient) {}
 

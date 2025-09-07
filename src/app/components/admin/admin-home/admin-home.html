@@ -1,11 +1,38 @@
 <app-admin-navigation></app-admin-navigation>
 <h1>Усі витрати</h1>
 @for (expense of allExpenses; track expense) {
-    <div class="expense-item">
-        <!-- <span class="name">{{ expense.name }}</span> -->
-        <span class="department">{{ expense.department }}</span>
-        <span class="date">{{ expense.date }}</span>
-        <span class="amount">{{ expense.amount }}</span>
-        <span class="type">{{ expense.type }}</span>
-    </div>
+    @if (expense.isEdited) {
+        <div class="expense-form">
+            <select [(ngModel)]="expense.type">
+                @for (type of expenseTypes; track type) {
+                    <option [ngValue]="type">{{type.name}}</option>
+                }
+            </select>
+            <select [(ngModel)]="expense.user">
+                @for (user of users; track user) {
+                    <option [ngValue]="user">{{user.name}}</option>
+                }
+            </select>
+            <select [(ngModel)]="expense.department">
+                @for (department of departments; track department) {
+                    <option [ngValue]="department">{{department.name}}</option>
+                }
+            </select>
+            <input type="number" placeholder="Сума" [(ngModel)]="expense.amount">
+            <input type="date" [(ngModel)]="expense.date">
+            <button (click)="saveChanges(expense)">Зберегти</button>
+        </div>
+    }
+    @else {
+        <div class="expense-item">
+            <span class="type">{{ expense.type?.name }}</span>
+            <span class="user">{{ expense.user?.name }}</span>
+            <span class="department">{{ expense.department?.name }}</span>
+            <span class="amount">{{ expense.amount }}</span>
+            <span class="date">{{ expense.date | date:'dd/MM/yyyy' }}</span>
+            <button (click)="editExpense(expense)">Редагувати</button>
+            <button (click)="deleteExpense(expense.id)">Видалити</button>
+        </div>
+    }
 }
+<button (click)="addExpense()">Додати витрату</button>

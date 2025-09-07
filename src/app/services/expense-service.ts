@@ -23,6 +23,17 @@ export class ExpenseService {
     return this.http.get<Expense[]>(url, { headers });
   }
 
+  getUserExpenses(userId: string | null): Observable<Expense[]> {
+    const headers = this.token
+      ? new HttpHeaders({ 
+        'Authorization': `Bearer ${this.token}`,
+        'Content-Type': 'application/json'
+      })
+      : undefined;
+      const url = this.apiUrl + `/user/${userId}`;
+      return this.http.get<Expense[]>(url, {headers})
+  }
+
   addExpense(expense: Expense): Observable<string> {
     const headers = this.token
       ? new HttpHeaders({ 

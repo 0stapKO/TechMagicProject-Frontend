@@ -5,6 +5,8 @@ import { DepartmentService } from '../../../services/department-service';
 import { Department } from '../../../models/department.model';
 import { ExpenseTypeService } from '../../../services/expense-type-service';
 import { ExpenseType } from '../../../models/expenseType.model';
+import { ExpenseService } from '../../../services/expense-service';
+import { Expense } from '../../../models/expenses.model';
 
 @Component({
   selector: 'app-add-expense',
@@ -13,19 +15,26 @@ import { ExpenseType } from '../../../models/expenseType.model';
   styleUrl: './add-expense.scss'
 })
 export class AddExpense {
-  public type: string = '';
-  public date: string = '';
-  public amount: number | null = null;
-  public allExpenseTypes: ExpenseType[] = [];
+  public newExpense: Expense = {
+          id: '',
+          amount: 0,
+          date: '',
+    }
 
-  constructor(private expenseTypeService: ExpenseTypeService) {
+  public allExpenseTypes: ExpenseType[] = [];
+  public departments: Department[] = [];
+
+  constructor(private expenseService: ExpenseService, 
+    private expenseTypeService: ExpenseTypeService, private departmentService: DepartmentService) {
       this.expenseTypeService.getExpenseTypes().subscribe((types) => {
         this.allExpenseTypes = types;
     });
-
+    this.departmentService.getDepartments().subscribe((departments) => {
+      this.departments = departments;
+    })
   }
 
   addExpense() {
-    console.log(`Type: ${this.type}, Date: ${this.date}, Amount: ${this.amount}, Department: ${''}`);
+    this.expenseService.addExpense(this.newExpense).subscribe()
   }
 }

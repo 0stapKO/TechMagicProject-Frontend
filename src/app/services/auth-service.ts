@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 interface LoginResponse {
   token: string;
   role: string;
+  id: string;
 }
 
 @Injectable({
@@ -30,6 +31,7 @@ export class AuthService {
           console.log('Login successful', response);
           this.role = response.role; 
           localStorage.setItem('token', response.token); 
+          localStorage.setItem('userId', response.id); 
           this.redirectUser();
         },
         error: (err) => {

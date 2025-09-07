@@ -1,32 +1,43 @@
 <app-admin-navigation></app-admin-navigation>
 <h1>Усі співробітники</h1>
-@for (user of users; track user) {
-    @if(user.isEdited){
-        <div class="user-form">
-            <input type="text" [(ngModel)]="user.name" placeholder="Ім'я">
-            <input type="email" [(ngModel)]="user.email" placeholder="Email">
-            <select [(ngModel)]="user.department">
-                @for (department of departments; track department){
-                    <option [ngValue]="department">{{department.name}}</option>
-                }
-            </select>
-            <select [(ngModel)]="user.role" >
-                <option value="user">user</option>
-                <option value="admin">admin</option>
-            </select>
-            <button (click)="saveUser(user)">Зберегти</button>
-        </div>
-    }
-    @else{
-        <div class="user-item">
-            <span class="name">{{ user.name }}</span>
-            <span class="email">{{ user.email }}</span>
-            <span class="department">{{ user.department?.name || 'відділ' }}</span>
-            <span class="role">{{ user.role }}</span>
-            <button (click)="editUser(user)">Редагувати</button>
-            <button (click)="deleteUser(user.id)">Видалити</button>
-        </div>
-    }
+<div class="table-div">
+    <div class="users-table">
+        <span class="column-name">Ім'я</span>
+        <span class="column-name">Email</span>
+        <span class="column-name">Відділ</span>
+        <span class="column-name">Роль</span>
+        <div class="hidden"></div>
+        @for (user of users; track user) {
+            @if(user.isEdited){
+                <input class="table-item user-form" type="text" [(ngModel)]="user.name" placeholder="Ім'я">
+                <input class="table-item user-form" type="email" [(ngModel)]="user.email" placeholder="Email">
+                <select class="table-item user-form" [(ngModel)]="user.department">
+                    @for (department of departments; track department){
+                        <option [ngValue]="department">{{department.name}}</option>
+                    }
+                </select>
+                <select class="table-item user-form" [(ngModel)]="user.role" >
+                    <option value="user">user</option>
+                    <option value="admin">admin</option>
+                </select>
+                <button class="save-button" (click)="saveUser(user)">Зберегти</button>
+            }
+            @else{
+                <span class="table-item">{{ user.name }}</span>
+                <span class="table-item">{{ user.email }}</span>
+                <span class="table-item">{{ user.department?.name || 'відділ' }}</span>
+                <span class="table-item">{{ user.role }}</span>
+                <div class="buttons">
+                <button class="edit-button" (click)="editUser(user)">
+                        <img class="edit-button-icon" src="/assets/images/edit.svg">
+                    </button>
+                    <button class="edit-button" (click)="deleteUser(user.id)">
+                        <img class="delete-button-icon" src="/assets/images/delete.svg">
+                    </button>
+                </div>
+            }
 
-}
-<button (click)="addUser()">Додати працівника</button>
+        }
+    </div>
+</div>
+<button class="add-button" (click)="addUser()">Додати працівника</button>

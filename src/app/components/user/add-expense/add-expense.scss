@@ -1,0 +1,29 @@
+h1 {
+    font-size: 50px;
+    font-family: Arial;
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+}
+.add-expense-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.add-expense-form {
+    width: 300px;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.add-expense-button {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial;
+    padding: 14px 20px;
+    border-radius: 15px;
+    border-style: none;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+}

@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-expense-types',
   imports: [AdminNavigation, FormsModule],
   templateUrl: './expense-types.html',
-  styleUrl: './expense-types.scss'
+  styleUrls: ['./expense-types.scss', '../../styles/table.scss']
 })
 export class ExpenseTypes {
   public expenseTypes: ExpenseType[] = [];

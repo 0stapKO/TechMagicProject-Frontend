@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-user-navigation',
   imports: [RouterModule],
   templateUrl: './user-navigation.html',
-  styleUrl: './user-navigation.scss'
+  styleUrl: '../../styles/navigation.scss'
 })
 export class UserNavigation {
 

@@ -9,7 +9,7 @@ import { Department } from '../../../models/department.model';
   selector: 'app-all-users',
   imports: [AdminNavigation, FormsModule],
   templateUrl: './all-users.html',
-  styleUrl: './all-users.scss'
+  styleUrls: ['./all-users.scss', '../../styles/table.scss']
 })
 export class AllUsers {
   public users: User[] = [];

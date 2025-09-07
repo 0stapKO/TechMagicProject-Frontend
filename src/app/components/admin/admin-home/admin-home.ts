@@ -15,7 +15,7 @@ import { Department } from '../../../models/department.model';
   selector: 'app-admin-home',
   imports: [AdminNavigation, DatePipe, FormsModule],
   templateUrl: './admin-home.html',
-  styleUrl: './admin-home.scss'
+  styleUrls: ['./admin-home.scss', '../../styles/table.scss']
 })
 export class AdminHome {
   public allExpenses: Expense[] = [];

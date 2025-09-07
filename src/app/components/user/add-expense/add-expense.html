@@ -1,15 +1,17 @@
-<h1>Оформити витрату</h1>
 <app-user-navigation></app-user-navigation>
-<select [(ngModel)]="newExpense.type">
-  @for (expenseType of allExpenseTypes; track expenseType) {
-    <option [value]="expenseType.id">{{ expenseType.name }}</option>
-  }
-</select>
-<select [(ngModel)]="newExpense.department">
-  @for (department of departments; track department) {
-    <option [value]="department.id">{{ department.name }}</option>
-  }
-</select>
-<input type="date" [(ngModel)]="newExpense.date" />
-<input type="text" placeholder="Сума" [(ngModel)]="newExpense.amount" />
-<button (click)="addExpense()">Додати витрату</button>
+<h1>Оформити витрату</h1>
+<div class="add-expense-div">
+    <select class="add-expense-form" [(ngModel)]="newExpense.type">
+      @for (expenseType of allExpenseTypes; track expenseType) {
+        <option [value]="expenseType.id">{{ expenseType.name }}</option>
+      }
+    </select>
+    <select class="add-expense-form" [(ngModel)]="newExpense.department">
+      @for (department of departments; track department) {
+        <option [value]="department.id">{{ department.name }}</option>
+      }
+    </select>
+    <input class="add-expense-form" type="date" [(ngModel)]="newExpense.date" />
+    <input class="add-expense-form" type="text" placeholder="Сума" [(ngModel)]="newExpense.amount" />
+    <button class="add-expense-button" (click)="addExpense()">Додати витрату</button>
+</div>

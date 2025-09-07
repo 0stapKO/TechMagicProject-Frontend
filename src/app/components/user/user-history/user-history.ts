@@ -13,7 +13,7 @@ import { Department } from '../../../models/department.model';
   selector: 'app-user-history',
   imports: [UserNavigation, DatePipe, FormsModule],
   templateUrl: './user-history.html',
-  styleUrl: './user-history.scss'
+  styleUrls: ['./user-history.scss', '../../styles/table.scss']
 })
 export class UserHistory {
   public userExpenses: Expense[] = [];

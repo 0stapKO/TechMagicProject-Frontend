@@ -8,7 +8,8 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-departments',
   imports: [AdminNavigation, FormsModule],
   templateUrl: './departments.html',
-  styleUrl: './departments.scss'
+  styleUrls: ['./departments.scss', '../../styles/table.scss']
+  // styleUrl: './departments.scss'
 })
 export class Departments {
   public allDepartments: Department[] = [];

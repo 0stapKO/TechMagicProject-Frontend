@@ -1,0 +1,59 @@
+h1 {
+    font-size: 50px;
+    font-family: Arial;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.column-name {
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Arial;
+    margin-bottom: 20px;
+    justify-self: center;
+}
+.table-item {
+    font-size: 18px;
+    font-family: Arial;
+    justify-self: center;
+    align-self: center; 
+}
+.save-button {
+    font-size: 15px;
+    font-weight: bold;
+    font-family: Arial;
+    width: 100px;
+    justify-self: center;
+    border-style: none;
+    border-radius: 15px;
+    background-color: rgb(116, 206, 116);
+    color: white;
+    height: 35px;
+    cursor: pointer;
+}
+.save-button:hover {
+    background-color: rgb(91, 162, 91);
+}
+.edit-button-icon{
+    width: 28px;
+   
+}
+.delete-button-icon{
+    width: 25px;
+   
+}
+.edit-button {
+    border-style: none;
+    background-color: white;
+    cursor: pointer;
+}
+.add-button {
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial;
+    justify-self: center;
+    margin-top: 30px;
+    padding: 10px 15px;
+    cursor: pointer;
+}

@@ -1,22 +1,33 @@
 <app-admin-navigation></app-admin-navigation>
 <h1>Види витрат</h1>
-@for (expenseType of expenseTypes; track expenseType) {
-    @if (expenseType.isEdited) {
-        <div class="edit-form">
-            <input type="text" [(ngModel)]="expenseType.name" placeholder="Назва виду витрат" />
-            <input type="text" [(ngModel)]="expenseType.description" placeholder="Опис" />
-            <input type="number" [(ngModel)]="expenseType.max_amount" placeholder="Максимальна сума" />
-            <button (click)="saveChanges(expenseType)">Зберегти</button>
-        </div>
-    }
-    @else {
-        <div class="expense-type-item">
-            <span class="name">{{ expenseType.name }}</span>
-            <span class="description">{{ expenseType.description }}</span>
-            <span class="max_amount">{{ expenseType.max_amount }}</span>
-            <button (click)="editType(expenseType)">Редагувати</button>
-            <button (click)="deleteType(expenseType.id)">Видалити</button>
-        </div>
-    }
-}
-<button (click)="addType()">Додати вид витрат</button>
+<div class="table-div">
+    <div class="expense-types-table">
+        <span class="column-name">Назва</span>
+        <span class="column-name">Опис</span>
+        <span class="column-name">Сума макс. витрат</span>
+        <div></div>
+        @for (expenseType of expenseTypes; track expenseType) {
+            @if (expenseType.isEdited) {
+                <input class="table-item type-form" type="text" [(ngModel)]="expenseType.name" placeholder="Назва виду витрат" />
+                <input class="table-item type-form" type="text" [(ngModel)]="expenseType.description" placeholder="Опис" />
+                <input class="table-item type-form" type="number" [(ngModel)]="expenseType.max_amount" placeholder="Максимальна сума" />
+                <button class="save-button" (click)="saveChanges(expenseType)">Зберегти</button>
+
+            }
+            @else {
+                <span class="table-item">{{ expenseType.name }}</span>
+                <span class="table-item">{{ expenseType.description }}</span>
+                <span class="table-item">{{ expenseType.max_amount }}</span>
+                <div class="buttons">
+                    <button class="edit-button" (click)="editType(expenseType)">
+                        <img class="edit-button-icon" src="/assets/images/edit.svg">
+                    </button>
+                    <button class="edit-button" (click)="deleteType(expenseType.id)">
+                        <img class="delete-button-icon" src="/assets/images/delete.svg">
+                    </button>
+                </div>
+            }
+        }
+    </div>
+</div>
+<button class="add-button" (click)="addType()">Додати вид витрат</button>

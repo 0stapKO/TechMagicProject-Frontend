@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-admin-navigation',
   imports: [RouterModule],
   templateUrl: './admin-navigation.html',
-  styleUrl: './admin-navigation.scss'
+  styleUrl: '../../styles/navigation.scss'
 })
 export class AdminNavigation {
 

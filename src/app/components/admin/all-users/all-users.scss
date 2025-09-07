@@ -1,0 +1,8 @@
+.users-table {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-self: center;
+}
+.user-form{
+    max-width: 180px;
+}

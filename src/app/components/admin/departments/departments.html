@@ -1,20 +1,30 @@
 <app-admin-navigation></app-admin-navigation>
 <h1>Відділи</h1>
-@for (department of allDepartments; track department) {
-    @if (department.isEdited) {
-        <div class="edit-form">
-            <input type="text" [(ngModel)]="department.name" placeholder="Назва відділу" />
-            <input type="number" [(ngModel)]="department.workers_number" placeholder="Кількість працівників" />
-            <button (click)="saveChanges(department)">Зберегти</button>
-        </div>
-    }
-    @else {
-        <div class="department-item">
-            <span class="name">{{ department.name }}</span>
-            <span class="workers_count">{{ department.workers_number }}</span>
-            <button (click)="editDepartment(department)">Редагувати</button>
-            <button (click)="deleteDepartment(department.id)">Видалити</button>
-        </div>
-    }
-}
-<button (click)="addDepartment()">Додати відділ</button>
+<div class="table-div">
+    <div class="departments-table">
+    <span class="column-name">Назва</span>
+    <span class="column-name">Кількість працівників</span>
+    <div class="hidden"></div>
+        @for (department of allDepartments; track department) {
+            @if (department.isEdited) {
+                <input class="table-item department-form" type="text" [(ngModel)]="department.name" placeholder="Назва відділу" />
+                <input class="table-item department-form" type="number" [(ngModel)]="department.workers_number" placeholder="Кількість працівників" />
+                <button class="save-button" (click)="saveChanges(department)">Зберегти</button>
+
+            }
+            @else {
+                <span class="table-item">{{ department.name }}</span>
+                <span class="table-item">{{ department.workers_number }}</span>
+                <div class="buttons">
+                    <button class="edit-button" (click)="editDepartment(department)">
+                        <img class="edit-button-icon" src="/assets/images/edit.svg">
+                    </button>
+                    <button class="edit-button" (click)="deleteDepartment(department.id)">
+                        <img class="delete-button-icon" src="/assets/images/delete.svg">
+                    </button>
+                </div>
+            }
+        }
+    </div>
+</div>
+<button class="add-button" (click)="addDepartment()">Додати відділ</button>

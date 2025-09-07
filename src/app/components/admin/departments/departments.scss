@@ -1,0 +1,8 @@
+.departments-table {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-self: center;
+}
+.department-form{
+    max-width: 120px;
+}

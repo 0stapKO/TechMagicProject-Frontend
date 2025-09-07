@@ -1,38 +1,50 @@
 <app-admin-navigation></app-admin-navigation>
 <h1>Усі витрати</h1>
-@for (expense of allExpenses; track expense) {
-    @if (expense.isEdited) {
-        <div class="expense-form">
-            <select [(ngModel)]="expense.type">
-                @for (type of expenseTypes; track type) {
-                    <option [ngValue]="type">{{type.name}}</option>
-                }
-            </select>
-            <select [(ngModel)]="expense.user">
-                @for (user of users; track user) {
-                    <option [ngValue]="user">{{user.name}}</option>
-                }
-            </select>
-            <select [(ngModel)]="expense.department">
-                @for (department of departments; track department) {
-                    <option [ngValue]="department">{{department.name}}</option>
-                }
-            </select>
-            <input type="number" placeholder="Сума" [(ngModel)]="expense.amount">
-            <input type="date" [(ngModel)]="expense.date">
-            <button (click)="saveChanges(expense)">Зберегти</button>
-        </div>
-    }
-    @else {
-        <div class="expense-item">
-            <span class="type">{{ expense.type?.name }}</span>
-            <span class="user">{{ expense.user?.name }}</span>
-            <span class="department">{{ expense.department?.name }}</span>
-            <span class="amount">{{ expense.amount }}</span>
-            <span class="date">{{ expense.date | date:'dd/MM/yyyy' }}</span>
-            <button (click)="editExpense(expense)">Редагувати</button>
-            <button (click)="deleteExpense(expense.id)">Видалити</button>
-        </div>
-    }
-}
-<button (click)="addExpense()">Додати витрату</button>
+<div class="table-div">
+    <div class="expenses-table">
+        <span class="column-name">Вид</span>
+        <span class="column-name">Робітник</span>
+        <span class="column-name">Відділ</span>
+        <span class="column-name">Сума</span>
+        <span class="column-name">Дата</span>
+        <div></div>
+        @for (expense of allExpenses; track expense) {
+            @if (expense.isEdited) {
+                <select class="table-item expense-form" [(ngModel)]="expense.type">
+                    @for (type of expenseTypes; track type) {
+                        <option [ngValue]="type">{{type.name}}</option>
+                    }
+                </select>
+                <select class="table-item expense-form" [(ngModel)]="expense.user">
+                    @for (user of users; track user) {
+                        <option [ngValue]="user">{{user.name}}</option>
+                    }
+                </select>
+                <select class="table-item expense-form" [(ngModel)]="expense.department">
+                    @for (department of departments; track department) {
+                        <option [ngValue]="department">{{department.name}}</option>
+                    }
+                </select>
+                <input class="table-item expense-form" type="number" placeholder="Сума" [(ngModel)]="expense.amount">
+                <input class="table-item expense-form" type="date" [(ngModel)]="expense.date">
+                <button class="save-button" (click)="saveChanges(expense)">Зберегти</button>
+            }
+            @else {
+                <span class="table-item">{{ expense.type?.name }}</span>
+                <span class="table-item">{{ expense.user?.name }}</span>
+                <span class="table-item">{{ expense.department?.name }}</span>
+                <span class="table-item">{{ expense.amount }}</span>
+                <span class="table-item">{{ expense.date | date:'dd/MM/yyyy' }}</span>
+                <div class="buttons">
+                    <button class="edit-button" (click)="editExpense(expense)">
+                        <img class="edit-button-icon" src="/assets/images/edit.svg">
+                    </button>
+                    <button class="edit-button" (click)="deleteExpense(expense.id)">
+                        <img class="delete-button-icon" src="/assets/images/delete.svg">
+                    </button>
+                </div>
+            }
+        }
+    </div>
+</div>
+<button class="add-button" (click)="addExpense()">Додати витрату</button>

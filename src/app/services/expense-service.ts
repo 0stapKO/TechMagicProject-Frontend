@@ -57,7 +57,7 @@ export class ExpenseService {
   }
 
   updateExpense(expense: Expense): Observable<void> {
-    // console.log(expense)
+    console.log(expense)
     // console.log(this.token)
     const headers = this.token
       ? new HttpHeaders({ 

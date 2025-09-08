@@ -5,12 +5,14 @@
         <span class="column-name">Назва</span>
         <span class="column-name">Опис</span>
         <span class="column-name">Сума макс. витрат</span>
+        <span class="column-name">Витрачено</span>
         <div></div>
         @for (expenseType of expenseTypes; track expenseType) {
             @if (expenseType.isEdited) {
                 <input class="table-item type-form" type="text" [(ngModel)]="expenseType.name" placeholder="Назва виду витрат" />
                 <input class="table-item type-form" type="text" [(ngModel)]="expenseType.description" placeholder="Опис" />
                 <input class="table-item type-form" type="number" [(ngModel)]="expenseType.max_amount" placeholder="Максимальна сума" />
+                <span class="table-item">{{expenseType.spent}}</span>
                 <button class="save-button" (click)="saveChanges(expenseType)">Зберегти</button>
 
             }
@@ -18,6 +20,7 @@
                 <span class="table-item">{{ expenseType.name }}</span>
                 <span class="table-item">{{ expenseType.description }}</span>
                 <span class="table-item">{{ expenseType.max_amount }}</span>
+                <span class="table-item">{{expenseType.spent}}</span>
                 <div class="buttons">
                     <button class="edit-button" (click)="editType(expenseType)">
                         <img class="edit-button-icon" src="/assets/images/edit.svg">

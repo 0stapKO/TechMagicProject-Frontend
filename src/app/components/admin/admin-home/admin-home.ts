@@ -10,6 +10,7 @@ import { DepartmentService } from '../../../services/department-service';
 import { ExpenseType } from '../../../models/expenseType.model';
 import { User } from '../../../models/user.model';
 import { Department } from '../../../models/department.model';
+import { RedirectCommand, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-home',
@@ -24,8 +25,11 @@ export class AdminHome {
   public departments: Department[] = [];
 
   constructor(private expenseService: ExpenseService, private expenseTypeService: ExpenseTypeService,
-    private userService: UserService, private departmentService: DepartmentService
+    private userService: UserService, private departmentService: DepartmentService, private router: Router
   ) {
+    if(localStorage.getItem('role') !== 'admin') {
+      this.router.navigate(['/home']);
+    }
     this.expenseService.getAllExpenses().subscribe((expenses) => {
       this.allExpenses = expenses;
     })

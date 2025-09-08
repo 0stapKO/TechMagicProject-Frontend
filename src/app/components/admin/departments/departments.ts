@@ -3,6 +3,7 @@ import { AdminNavigation } from '../admin-navigation/admin-navigation';
 import { DepartmentService } from '../../../services/department-service';
 import { Department } from '../../../models/department.model';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-departments',
@@ -14,7 +15,10 @@ import { FormsModule } from '@angular/forms';
 export class Departments {
   public allDepartments: Department[] = [];
 
-  constructor(private departmentService: DepartmentService) {
+  constructor(private departmentService: DepartmentService, private router: Router) {
+    if(localStorage.getItem('role') !== 'admin') {
+      this.router.navigate(['/home']);
+    }
     this.departmentService.getDepartments().subscribe((departments) => {
       this.allDepartments = departments;
           console.log('ALL DEPARTMENTS', this.allDepartments[0]);})

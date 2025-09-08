@@ -5,6 +5,7 @@ import { UserService } from '../../../services/user-service';
 import { DepartmentService } from '../../../services/department-service';
 import { FormsModule } from '@angular/forms';
 import { Department } from '../../../models/department.model';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-all-users',
   imports: [AdminNavigation, FormsModule],
@@ -15,7 +16,12 @@ export class AllUsers {
   public users: User[] = [];
   public departments: Department[] = []
 
-  constructor(private userService: UserService, private departmentService: DepartmentService) {
+  constructor(private userService: UserService, private departmentService: DepartmentService,
+    private router: Router
+  ) {
+    if(localStorage.getItem('role') !== 'admin') {
+      this.router.navigate(['/home']);
+    }
     userService.getAllUsers().subscribe((users) => {
       this.users = users;
       console.log(users[0])

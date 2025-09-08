@@ -32,6 +32,7 @@ export class AuthService {
           this.role = response.role; 
           localStorage.setItem('token', response.token); 
           localStorage.setItem('userId', response.id); 
+          localStorage.setItem('role', response.role); 
           this.redirectUser();
         },
         error: (err) => {
